@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Cumpleaños Mi Amor</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Georgia', 'Times New Roman', serif;
+  }
+
+  body {
+    background: linear-gradient(135deg, #2b0a1a 0%, #5c1030 40%, #8e1c44 70%, #c23a63 100%);
+    background-size: 300% 300%;
+    animation: bgShift 18s ease-in-out infinite;
+    position: relative;
+  }
+
+  @keyframes bgShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* ===== Contenedor central ===== */
+  .stage {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 10;
+    padding: 20px;
+  }
+
+  /* ===== Rosa grande decorativa ===== */
+  .big-rose {
+    font-size: clamp(100px, 12vw, 120px);
+    animation: rosePulse 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 25px rgba(255, 120, 180, 0.8));
+    margin-bottom: 10px;
+  }
+  @keyframes rosePulse {
+    0%, 100% { transform: scale(1) rotate(-4deg); }
+    50% { transform: scale(1.25) rotate(4deg); }
+  }
+
+  /* ===== Textos ===== */
+  .line {
+    opacity: 0;
+    transform: translateY(40px) scale(0.8);
+    color: #fff;
+    text-shadow: 0 0 15px rgba(255, 150, 200, 0.9),
+                 0 0 35px rgba(255, 80, 150, 0.7);
+  }
+
+  .te-amo {
+    font-size: clamp(34px, 9vw, 80px);
+    font-weight: bold;
+    font-style: italic;
+    letter-spacing: 2px;
+    animation: showLine 1.2s ease forwards;
+    animation-delay: 0.6s;
+  }
+
+  .cumple {
+    font-size: clamp(40px, 11vw, 100px);
+    font-weight: bold;
+    color: #ffd9e8;
+    letter-spacing: 3px;
+    animation: showLine 1.2s ease forwards, glow 2.5s ease-in-out infinite 2s;
+    animation-delay: 2s, 2s;
+    margin: 6px 0;
+  }
+
+  .mi-amor {
+    font-size: clamp(30px, 8vw, 70px);
+    font-style: italic;
+    color: #ffb3d1;
+    animation: showLine 1.2s ease forwards;
+    animation-delay: 3.4s;
+  }
+
+  @keyframes showLine {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes glow {
+    0%, 100% { text-shadow: 0 0 15px #ff77aa, 0 0 35px #ff3d7f; }
+    50% { text-shadow: 0 0 30px #ffaad0, 0 0 70px #ff4d90, 0 0 100px #ff1e6e; }
+  }
+
+  .hearts-row {
+    font-size: clamp(24px, 6vw, 48px);
+    margin-top: 18px;
+    opacity: 0;
+    animation: showLine 1s ease forwards;
+    animation-delay: 4.6s;
+    letter-spacing: 8px;
+  }
+
+  /* ===== Corazón de rosas latiendo ===== */
+  .rose-heart {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(200px, 55vw, 500px);
+    line-height: 1;
+    opacity: 0.12;
+    z-index: 1;
+    animation: heartBeat 1.4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes heartBeat {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    15% { transform: translate(-50%, -50%) scale(1.12); }
+    30% { transform: translate(-50%, -50%) scale(1); }
+    45% { transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  /* ===== Pétalos y corazones que caen ===== */
+  .petal, .falling-heart, .sparkle {
+    position: absolute;
+    top: -60px;
+    z-index: 5;
+    pointer-events: none;
+    will-change: transform;
+  }
+  .petal { font-size: 22px; }
+  .falling-heart { font-size: 20px; }
+  .sparkle { font-size: 14px; }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(0) translateX(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(110vh) translateX(var(--drift)) rotate(var(--spin));
+      opacity: 0;
+    }
+  }
+
+  /* ===== Confeti de flores al inicio ===== */
+  .bloom {
+    position: absolute;
+    z-index: 6;
+    pointer-events: none;
+    font-size: 28px;
+    animation: bloomPop 2.5s ease-out forwards;
+  }
+  @keyframes bloomPop {
+    0% { transform: scale(0) rotate(0deg); opacity: 0; }
+    30% { transform: scale(1.3) rotate(60deg); opacity: 1; }
+    100% { transform: scale(0.8) rotate(180deg) translateY(-40px); opacity: 0; }
+  }
+
+  /* ===== Firma ===== */
+  .signature {
+    position: absolute;
+    bottom: 22px;
+    width: 100%;
+    text-align: center;
+    color: #ffcfe2;
+    font-style: italic;
+    font-size: clamp(13px, 3vw, 18px);
+    opacity: 0;
+    animation: showLine 1s ease forwards;
+    animation-delay: 5.5s;
+    z-index: 10;
+    text-shadow: 0 0 10px rgba(255,120,180,0.8);
+  }
+
+  /* Botón de reinicio */
+  .restart {
+    position: absolute;
+    top: 18px; right: 18px;
+    z-index: 20;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: 0.3s;
+  }
+  .restart:hover { background: rgba(255,255,255,0.3); transform: scale(1.05); }
+</style>
+</head>
+<body>
+
+  <button class="restart" onclick="location.reload()">✦ Reiniciar</button>
+
+  <!-- Corazón de fondo -->
+  <div class="rose-heart">❤️</div>
+
+  <div class="stage">
+    <div class="big-rose">🌹</div>
+    <div class="line te-amo">Te Amo</div>
+    <div class="line cumple">¡Feliz Cumpleaños!</div>
+    <div class="line mi-amor">Mi Amor</div>
+    <div class="hearts-row">🌹 ❤️ 🌸 ❤️ 🌹</div>
+  </div>
+
+  <div class="signature">Con todo mi corazón, para ti mi Karen hermosa 💕</div>
+
+<script>
+  const emojisPetal  = ['🌹','🌺','🌸','💮','🏵️'];
+  const emojisHeart  = ['❤️','💖','💕','💗','💓','💝'];
+  const emojisSparkle = ['✨','⭐','💫','🌟'];
+
+  function rand(min, max) { return Math.random() * (max - min) + min; }
+
+  function spawnFalling(type, delay) {
+    const el = document.createElement('div');
+    let set, cls;
+    if (type === 'petal') { set = emojisPetal; cls = 'petal'; }
+    else if (type === 'heart') { set = emojisHeart; cls = 'falling-heart'; }
+    else { set = emojisSparkle; cls = 'sparkle'; }
+
+    el.className = cls;
+    el.textContent = set[Math.floor(Math.random() * set.length)];
+    el.style.left = rand(0, 100) + 'vw';
+    const duration = rand(6, 13);
+    const drift = rand(-120, 120) + 'px';
+    const spin = rand(-540, 540) + 'deg';
+
+    el.style.setProperty('--drift', drift);
+    el.style.setProperty('--spin', spin);
+    el.style.animation = `fall ${duration}s linear ${delay}s forwards`;
+    el.style.fontSize = rand(14, 32) + 'px';
+
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), (duration + delay) * 1000 + 500);
+  }
+
+  // Lluvia continua
+  function rain() {
+    spawnFalling('petal', 0);
+    if (Math.random() > 0.4) spawnFalling('heart', 0);
+    if (Math.random() > 0.7) spawnFalling('sparkle', 0);
+  }
+  setInterval(rain, 380);
+
+  // Ráfaga inicial
+  for (let i = 0; i < 30; i++) {
+    setTimeout(() => spawnFalling('petal', 0), i * 120);
+    if (i % 2 === 0) setTimeout(() => spawnFalling('heart', 0), i * 120 + 60);
+  }
+
+  // Explosión de flores al cargar
+  const flores = ['🌹','🌸','💐','🌺','🌷','💖','🌻'];
+  function bloomBurst(cx, cy, n) {
+    for (let i = 0; i < n; i++) {
+      const b = document.createElement('div');
+      b.className = 'bloom';
+      b.textContent = flores[Math.floor(Math.random() * flores.length)];
+      b.style.left = cx + 'px';
+      b.style.top = cy + 'px';
+      const angle = Math.random() * Math.PI * 2;
+      const dist = rand(80, 320);
+      const tx = Math.cos(angle) * dist;
+      const ty = Math.sin(angle) * dist;
+      b.style.transform = 'translate(0,0)';
+      b.style.animation = `bloomPop 2.2s ease-out ${rand(0,0.4)}s forwards`;
+      b.animate([
+        { transform: 'translate(0,0) scale(0)', opacity: 0 },
+        { transform: `translate(${tx}px, ${ty}px) scale(1.2)`, opacity: 1, offset: 0.5 },
+        { transform: `translate(${tx*1.3}px, ${ty*1.3 + 40}px) scale(0.6)`, opacity: 0 }
+      ], { duration: 2400, easing: 'ease-out', fill: 'forwards' });
+      document.body.appendChild(b);
+      setTimeout(() => b.remove(), 3000);
+    }
+  }
+
+  window.addEventListener('load', () => {
+    setTimeout(() => bloomBurst(innerWidth/2, innerHeight/2, 18), 300);
+    setTimeout(() => bloomBurst(innerWidth/2, innerHeight/2, 14), 1500);
+  });
+
+  // Toque/clic: explosión de amor
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('restart')) return;
+    bloomBurst(e.clientX, e.clientY, 10);
+  });
+</script>
+
+</body>
+  </html>
